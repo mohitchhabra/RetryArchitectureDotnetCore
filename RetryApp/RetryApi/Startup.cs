@@ -36,15 +36,18 @@ namespace RetryApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
-            else
+            } else
             {
                 app.UseHsts();
             }
 
-            app.UseMiddleware<RandomFailureMiddleware>();
-
             app.UseHttpsRedirection();
+
+            app.UseWhen(c => c.Request.Path.StartsWithSegments("/api"), appBuilder =>
+            {
+                appBuilder.UseMiddleware<RandomFailureMiddleware>();
+            });
+
             app.UseMvc();
         }
     }

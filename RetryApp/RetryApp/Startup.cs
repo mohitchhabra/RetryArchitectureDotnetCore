@@ -32,10 +32,10 @@ namespace RetryApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddHttpClient("api")
-                    .AddTransientHttpErrorPolicy(p => p.RetryAsync(6));
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+//            services.AddHttpClient("client").AddTransientHttpErrorPolicy(p => p.Retry(10));
+        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

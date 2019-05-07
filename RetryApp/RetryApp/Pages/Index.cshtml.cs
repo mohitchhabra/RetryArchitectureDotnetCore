@@ -11,10 +11,10 @@ namespace RetryApp.Pages
     public class IndexModel : PageModel
     {
         public string Values { get; set; }
-        public async Task OnGet([FromServices]IHttpClientFactory factory)
+        public async Task OnGet(/*[FromServices]IHttpClientFactory factory*/)
         {
-            var client = factory.CreateClient("api");
-            Values = await client.GetStringAsync("https://localhost:44391/api/values");
+            var client = new HttpClient();
+            Values = await client.GetStringAsync("https://localhost:44338/api/values");
         }
     }
 }
